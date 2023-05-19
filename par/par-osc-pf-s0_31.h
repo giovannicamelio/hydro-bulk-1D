@@ -1,5 +1,5 @@
 /// @file
-/// @brief parameter file for the migration of the perfect fluid
+/// @brief parameter file for the oscillation of the perfect fluid
 /// @details the settings in this files determine the code behaviour
 /// @author Giovanni Camelio
 /// @date 2022
@@ -70,15 +70,15 @@ static const enum {
 
 /// @brief number of physical grid points (without ghosts)
 /// @details integer, N1 > 0
-#define N1 8001
+#define N1 800
 
 /// @brief file name of the output profiles
 /// @details is a string
-#define OUTPUT_FILE "mig-pf.dat"
+#define OUTPUT_FILE "osc-pf-s0_31.dat"
 
 /// @brief file name of output log
 /// @details is a string
-#define LOG_FILE "mig-pf.log"
+#define LOG_FILE "osc-pf-s0_31.log"
 
 /// @brief Courant-Friedrichs-Lewy factor [#]
 /// @details double, 0.0 < CFL < 1.0
@@ -86,7 +86,7 @@ static const enum {
 
 /// @brief final time of the simulation [M☉]
 /// @details double, END_TIME > 0.0 (for @ref BJORKEN, END_TIME > 1.0)
-#define END_TIME (0.005*SEC)
+#define END_TIME (0.02*SEC)
 
 /// @brief exponent of the gamma-law EOS [#]
 /// @details double, GAM > 1.0,
@@ -146,12 +146,12 @@ static const enum {
 /// @brief central rest mass density [M☉⁻²]
 /// @details double, RHO0 > 0.0
 ///          used if @ref PROBLEM != @ref SHOCKTUBE
-#define RHO0 (4e-3)
+#define RHO0 (2.*RHON)
 
 /// @brief maximal radius of the physical (without ghost) grid [M☉]
 /// @details double, MAX_R > 0.0,
 ///          used if @ref PROBLEM >= @ref CLOUD
-#define MAX_R (80.)
+#define MAX_R (13.)
 
 /// @brief relative tolerance in the cons2prim inversion [#]
 /// @details double, TOL > 0.0
@@ -201,11 +201,11 @@ static const enum {
 
 /// @brief initial entropy per baryon
 /// @details double, S0 >= 0.0, used if @ref PROBLEM == @ref BJORKEN
-#define S0 0.
+#define S0 0.31
 
 /// @brief amplitude of the initial velocity perturbation
 /// @detail @li double,
 ///         @li used if @ref PROBLEM = @ref STAR,
 ///         @li v(r)= V_PERTURBATION * sin(π * r / R),
 ///         @li if V_PERTURBATION == 0.0, there is no initial perturbation
-#define V_PERTURBATION (0.0)
+#define V_PERTURBATION (5e-3)

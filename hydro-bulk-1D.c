@@ -392,10 +392,11 @@ double eos2seq (const double rho, const double u) {
 double get_nrate_over_aff(const double rho, const double yeq, const double t) {
    // BEWARE: I am dividing μ and π by 10⁹K to avoid overflow of the doubles (KELVIN ~ 7e71)
    const double t0= M_PI*t/(1e9*KELVIN);
-   const double tmp= t0*t0;
-   const double nfactor= 8.86e31/(CM*CM*CM*SEC); // from cgs to code units
+   const double tmp= (USE_DURCA_REACTIONS ? t0*t0 : t0*t0*t0);
+   const double nfactor= (USE_DURCA_REACTIONS ? 8.86e31 : 5.91e23)/(CM*CM*CM*SEC); // from cgs to code units
+   const double ratio= (USE_DURCA_REACTIONS ? 17./30. : 367./63.);
    const double cbrty= cbrt(yeq*rho/RHON);
-   return nfactor*cbrty*17./30.*tmp*tmp/(1e9*KELVIN);
+   return nfactor*cbrty*ratio*tmp*tmp/(1e9*KELVIN);
 }
 
 /// @brief get the total energy reaction rates
@@ -412,10 +413,12 @@ double get_erate (
 {
    // BEWARE: I am dividing μ and π by 10⁹K to avoid overflow of the doubles (KELVIN ~ 7e71)
    const double t0= M_PI*t/(1e9*KELVIN);
-   const double tmp= t0*t0;
-   const double efactor= 1.22e25/(CM*CM*CM*SEC)*ERG; // from cgs to code units
+   const double t0t0= t0*t0;
+   const double tmp= (USE_DURCA_REACTIONS ? t0t0*t0 : t0t0*t0t0);
+   const double efactor= (USE_DURCA_REACTIONS ? 1.22e25 : 8.15e16)/(CM*CM*CM*SEC)*ERG; // from cgs to code units
+   const double ratio= (USE_DURCA_REACTIONS ? 457./1260. : 11513./2520.);
    const double cbrty= cbrt(yeq*rho/RHON);
-   return efactor*cbrty*(1. + (y/yeq - 1.)/3.)*457./1260.*tmp*tmp*tmp;
+   return efactor*cbrty*(1. + (y/yeq - 1.)/3.)*ratio*tmp*tmp;
 }
 
 /// @brief compute the inverse bulk viscous timescale
@@ -426,8 +429,12 @@ double get_1_over_tau (const double rho, const double u) {
    if (NSPECIES == 1) return 1./TAU_BULK;
    const double rh= rho/RHON;
    const double t= eos2teq(rho, u);
-   const double tmp= t*M_PI/(1e9*KELVIN);
-   const double cons= 8.86e31/(CM*CM*CM*SEC)*cbrt(rh*rh)*17./30.*tmp*tmp*tmp*tmp/(1e9*KELVIN);
+   // BEWARE: I am dividing by 10⁹K to avoid overflow of the doubles (KELVIN ~ 7e71)
+   const double t0= M_PI*t/(1e9*KELVIN);
+   const double tmp= (USE_DURCA_REACTIONS ? t0*t0 : t0*t0*t0);
+   const double nfactor= (USE_DURCA_REACTIONS ? 8.86e31 : 5.91e23)/(CM*CM*CM*SEC); // from cgs to code units
+   const double ratio= (USE_DURCA_REACTIONS ? 17./30. : 367./63.);
+   const double cons= nfactor*cbrt(rh*rh)*ratio*tmp*tmp/(1e9*KELVIN);
    const double num= KE*YE0*YE0 + (NSPECIES == 3 ? KMU*YMU0*YMU0 : 0.);
    const double den= pow(YE0, 5./3.) + (NSPECIES == 3 ? pow(YMU0, 5./3.) : 0.);
    return 2.*cons*MN*MN/rho*num/den;

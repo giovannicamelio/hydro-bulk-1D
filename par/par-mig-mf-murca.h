@@ -1,5 +1,5 @@
 /// @file
-/// @brief parameter file for the migration of the perfect fluid
+/// @brief parameter file for the migration of the multicomponent fluid
 /// @details the settings in this files determine the code behaviour
 /// @author Giovanni Camelio
 /// @date 2022
@@ -53,7 +53,7 @@ static const enum {
 /// @brief control flag for the type of reaction considered
 /// @details true (dURCA) / false (mURCA),
 ///          used if @ref NSPECIES >= 2
-#define USE_DURCA_REACTIONS true
+#define USE_DURCA_REACTIONS false
 
 /// @brief order of the spatial reconstruction
 /// @details integer, 1 <= ORDER_SPACE <= 2,
@@ -66,7 +66,7 @@ static const enum {
 
 /// @brief number of independent species
 /// @details integer, 1 <= NSPECIES <= 3
-#define NSPECIES 1
+#define NSPECIES 2
 
 /// @brief number of physical grid points (without ghosts)
 /// @details integer, N1 > 0
@@ -74,11 +74,11 @@ static const enum {
 
 /// @brief file name of the output profiles
 /// @details is a string
-#define OUTPUT_FILE "mig-pf.dat"
+#define OUTPUT_FILE "mig-mf-murca.dat"
 
 /// @brief file name of output log
 /// @details is a string
-#define LOG_FILE "mig-pf.log"
+#define LOG_FILE "mig-mf-murca.log"
 
 /// @brief Courant-Friedrichs-Lewy factor [#]
 /// @details double, 0.0 < CFL < 1.0

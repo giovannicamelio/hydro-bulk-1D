@@ -1,4 +1,4 @@
-@note this repository is a copy of [Camelio (2022), "hydro-bulk-1D", zenodo, https://doi.org/10.5281/zenodo.6478023](https://zenodo.org/record/6478023)
+@note this repository is a copy of [Camelio (2022), "hydro-bulk-1D", zenodo, https://doi.org/10.5281/zenodo.6478022](https://doi.org/10.5281/zenodo.6478022)
 
 # hydro-bulk-1D
 
@@ -11,12 +11,14 @@ in the context of neutron stars.
 
 The theory and the code are described in the following papers:
 
-* [1] Camelio, Gavassino, Antonelli, Bernuzzi, and Haskell, "Simulating bulk viscosity in neutron stars I: formalism", submitted to PRD (2022).
-* [2] Camelio, Gavassino, Antonelli, Bernuzzi, and Haskell, "Simulating bulk viscosity in neutron stars II: evolution in spherical symmetry", submitted to PRD (2022).
+* [1] Camelio, Gavassino, Antonelli, Bernuzzi, and Haskell, "Simulating bulk viscosity in neutron stars. I. Formalism", PRD 107:103031 (2023).
+* [2] Camelio, Gavassino, Antonelli, Bernuzzi, and Haskell, "Simulating bulk viscosity in neutron stars. II. Evolution in spherical symmetry", PRD 107:103032 (2023).
 
 `hydro-bulk-1D` is released under the MIT License.
 
 If you use `hydro-bulk-1D` in your research, please cite Refs. [1] and [2].
+
+EDIT 2023-05-19: code updated during peer-review of Refs. [1] and [2].
 
 ## Content
 
@@ -33,7 +35,7 @@ The program is the file `hydro-bulk-1D.c`, which directly include the parameter 
 
 The parameter files for the simulations and tests presented in Ref. [2] are `par/par-*.h`.
 
-For example, to simulate the shocktube test using the `gcc` compiler, execute on a Linux shell:
+For example, to simulate the shocktube test using the `gcc` compiler, execute on a Linux terminal:
 
 ```
 $ cp par/par-shocktube.h parameters.h

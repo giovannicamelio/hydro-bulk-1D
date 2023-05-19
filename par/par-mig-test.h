@@ -50,6 +50,11 @@ static const enum {
 /// @details true (include luminosity) / false (no luminosity)
 #define INCLUDE_LUMINOSITY false
 
+/// @brief control flag for the type of reaction considered
+/// @details true (dURCA) / false (mURCA),
+///          used if @ref NSPECIES >= 2
+#define USE_DURCA_REACTIONS true
+
 /// @brief order of the spatial reconstruction
 /// @details integer, 1 <= ORDER_SPACE <= 2,
 ///          useful if @ref PROBLEM != @ref BJORKEN
@@ -106,7 +111,7 @@ static const enum {
 #define MAX_ITER 1000000
 
 /// @brief output frequency of the full profile
-/// @details is an integer
+/// @details is a double
 #define OUTPUT_INTERVAL (0.0015*SEC)
 
 /// @brief EOS polytropic constant [c=G=M☉=kB=1]
